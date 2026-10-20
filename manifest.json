@@ -1,0 +1,102 @@
+{
+  "$schema": "https://raw.githubusercontent.com/t8y2/dbx/main/plugins/manifest.schema.json",
+  "manifest_version": 1,
+  "id": "io.dbx.graphql",
+  "name": "GraphQL",
+  "version": "0.1.0",
+  "publisher": "alan",
+  "description": "GraphQL client for DBX: query editor, schema docs, and history.",
+  "icon": "assets/plugin.svg",
+  "engines": {
+    "dbx": ">=0.5.68",
+    "host_api": "1"
+  },
+  "permissions": ["host.storage"],
+  "entrypoints": {
+    "backend": {
+      "protocol_versions": [1],
+      "transport": "stdio-jsonl",
+      "executable": "bin/dbx-plugin-graphql"
+    },
+    "ui": {
+      "root": "ui",
+      "entry": "ui/index.html"
+    }
+  },
+  "contributions": [
+    {
+      "type": "connection-provider",
+      "id": "io.dbx.graphql.connection",
+      "label": "GraphQL",
+      "icon": "assets/plugin.svg",
+      "database_type": "graphql",
+      "description": "Connect to a GraphQL HTTP endpoint.",
+      "fields": [
+        {
+          "key": "display_name",
+          "label": "Connection name",
+          "type": "text",
+          "default": "GraphQL",
+          "binding": "name",
+          "required": true
+        },
+        {
+          "key": "endpoint",
+          "label": "Endpoint URL",
+          "type": "text",
+          "placeholder": "https://api.example.com/graphql",
+          "binding": "config",
+          "required": true
+        },
+        {
+          "key": "auth_token",
+          "label": "Bearer token",
+          "type": "password",
+          "binding": "secret",
+          "required": false,
+          "description": "Sent as Authorization: Bearer <token> when set."
+        },
+        {
+          "key": "extra_headers",
+          "label": "Extra headers (JSON)",
+          "type": "textarea",
+          "placeholder": "{\"X-Api-Key\":\"...\"}",
+          "binding": "config",
+          "required": false,
+          "description": "Optional JSON object of extra HTTP headers. Do not put secrets here."
+        }
+      ],
+      "workbench": "io.dbx.graphql.workbench",
+      "capabilities": ["test", "connect", "disconnect"]
+    },
+    {
+      "type": "workbench",
+      "id": "io.dbx.graphql.workbench",
+      "label": "GraphQL",
+      "description": "Query editor with schema docs and history.",
+      "icon": "assets/plugin.svg"
+    }
+  ],
+  "localizations": {
+    "zh-CN": {
+      "name": "GraphQL",
+      "description": "GraphQL 客户端：查询编辑器、Schema 文档与历史。",
+      "contributions": {
+        "io.dbx.graphql.connection": {
+          "label": "GraphQL",
+          "description": "连接到 GraphQL HTTP 端点。",
+          "fields": {
+            "display_name": { "label": "连接名称" },
+            "endpoint": { "label": "Endpoint URL", "placeholder": "https://api.example.com/graphql", "description": "完整的 GraphQL HTTP 地址。" },
+            "auth_token": { "label": "Bearer Token", "description": "填写后以 Authorization: Bearer <token> 发送。" },
+            "extra_headers": { "label": "额外请求头 (JSON)", "placeholder": "{\"X-Api-Key\":\"...\"}", "description": "可选 JSON 对象。不要把密钥写在这里。" }
+          }
+        },
+        "io.dbx.graphql.workbench": {
+          "label": "GraphQL",
+          "description": "查询编辑器，含 Schema 文档与历史。"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "GraphQL",
+  "description": "GraphQL client for DBX: query editor, schema docs, and history.",
+  "icon": "assets/plugin.svg",
+  "tags": ["graphql", "api", "query"],
+  "permissions": ["host.storage"],
+  "source": "https://github.com/allran/dbx-plugin-graphql",
+  "homepage": "https://github.com/allran/dbx-plugin-graphql",
+  "license": "Apache-2.0",
+  "releaseNotes": "Initial release: query editor, schema Docs Explorer, response tree, and history.",
+  "localizations": {
+    "zh-CN": {
+      "name": "GraphQL",
+      "description": "GraphQL 客户端：查询编辑器、Schema 文档与历史。"
+    }
+  }
+}
